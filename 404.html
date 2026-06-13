@@ -30,7 +30,8 @@
       justify-content: center;
       align-items: center;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: visible;
       user-select: none;
       /* Prevents text selection while moving mouse */
     }
@@ -52,6 +53,7 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
+      overflow: visible;
     }
 
     /* Big "4" typography styling */
@@ -70,6 +72,7 @@
       width: 320px;
       /* Aligns perfectly between the two '4's */
       height: auto;
+      overflow: visible;
       /* Smooth floating effect for the face container */
       animation: floatBody 4s ease-in-out infinite;
     }
@@ -90,10 +93,20 @@
       transition: transform 0.08s ease-out;
     }
 
+    .eyebrow {
+      transform-box: fill-box;
+      transform-origin: center;
+      pointer-events: none;
+    }
+
+    .eyebrow.is-lifting {
+      animation: eyebrowLift 0.45s ease-in-out 1;
+    }
+
     /* Mouth scaling for a slow, organic talking/breathing rhythm */
     .mouth {
       transform-origin: 206px 325px;
-      animation: talkingSmooth 1.4s ease-in-out infinite;
+      animation: talkingSmooth 2.6s cubic-bezier(0.45, 0.05, 0.25, 1) infinite;
     }
 
     /* --------------------------------------------------
@@ -170,18 +183,39 @@
 
       0%,
       100% {
-        transform: scaleY(1) scaleX(1);
+        transform: scaleY(1) scaleX(1) translateY(0);
       }
 
-      40%,
-      55% {
-        transform: scaleY(1.35) scaleX(0.97) translateY(1px);
-        /* Holds open for a bit */
+      18% {
+        transform: scaleY(0.96) scaleX(1.02) translateY(1px);
       }
 
-      85% {
-        transform: scaleY(0.9) scaleX(1.03);
-        /* Compresses slightly */
+      42% {
+        transform: scaleY(1.16) scaleX(0.98) translateY(2px);
+      }
+
+      58% {
+        transform: scaleY(1.22) scaleX(0.97) translateY(3px);
+      }
+
+      78% {
+        transform: scaleY(0.98) scaleX(1.01) translateY(1px);
+      }
+    }
+
+    @keyframes eyebrowLift {
+
+      0%,
+      100% {
+        transform: translateY(0) scaleY(1);
+      }
+
+      40% {
+        transform: translateY(-22px) scaleY(1.04);
+      }
+
+      75% {
+        transform: translateY(-6px) scaleY(0.99);
       }
     }
 
@@ -246,10 +280,10 @@
             fill="white" stroke="black" stroke-width="0.5" stroke-miterlimit="2.6131" />
         </g>
 
-        <path fill-rule="evenodd" clip-rule="evenodd"
+        <path class="eyebrow" id="eyebrow-left" fill-rule="evenodd" clip-rule="evenodd"
           d="M110.972 8.38344C112.343 13.3604 91.7039 8.13773 65.1161 15.469C38.5282 22.7945 15.9574 39.4912 14.7003 34.9199C13.2032 29.4857 33.1341 9.24056 57.322 2.60074C81.2813 -3.97622 109.601 3.40643 110.972 8.38344Z"
           fill="black" />
-        <path fill-rule="evenodd" clip-rule="evenodd"
+        <path class="eyebrow" id="eyebrow-right" fill-rule="evenodd" clip-rule="evenodd"
           d="M300.283 8.38344C298.912 13.3604 319.551 8.13773 346.139 15.469C372.727 22.7945 395.298 39.4912 396.555 34.9199C398.052 29.4857 378.121 9.24056 353.933 2.60074C329.974 -3.97622 301.655 3.40643 300.283 8.38344Z"
           fill="black" />
 
@@ -271,8 +305,25 @@
 
   <script>
     // Grab individual pupil cluster containers
+    const faceSvg = document.querySelector('.number-wrapper svg');
     const pupilLeft = document.getElementById('pupil-left');
     const pupilRight = document.getElementById('pupil-right');
+    const eyebrowLeft = document.getElementById('eyebrow-left');
+    const eyebrowRight = document.getElementById('eyebrow-right');
+
+    function triggerEyebrowLift() {
+      [eyebrowLeft, eyebrowRight].forEach((eyebrow) => {
+        eyebrow.classList.remove('is-lifting');
+        void eyebrow.getBoundingClientRect();
+        eyebrow.classList.add('is-lifting');
+      });
+    }
+
+    [eyebrowLeft, eyebrowRight].forEach((eyebrow) => {
+      eyebrow.addEventListener('animationend', () => {
+        eyebrow.classList.remove('is-lifting');
+      });
+    });
 
     window.addEventListener('mousemove', (e) => {
       // Current spatial coordinate of mouse cursor pointer
@@ -294,6 +345,9 @@
       pupilLeft.style.transform = `translate(${moveX}px, ${moveY}px)`;
       pupilRight.style.transform = `translate(${moveX}px, ${moveY}px)`;
     });
+
+    faceSvg.addEventListener('click', triggerEyebrowLift);
+    faceSvg.addEventListener('mouseenter', triggerEyebrowLift);
   </script>
 
 </body>

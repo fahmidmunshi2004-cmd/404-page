@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 | Page Not Found</title>
+  <meta name="theme-color" content="#f0f4f8">
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23f0f4f8'/%3E%3Cpath d='M18 14h20l8 8v28H18z' fill='%23ffffff' stroke='%23000000' stroke-width='3' stroke-linejoin='round'/%3E%3Cpath d='M38 14v10h10' fill='none' stroke='%23000000' stroke-width='3' stroke-linejoin='round'/%3E%3Cpath d='M23 43l18-18M41 43L23 25' stroke='%23000000' stroke-width='3.5' stroke-linecap='round'/%3E%3Ctext x='32' y='57' text-anchor='middle' font-size='14' font-family='Arial, sans-serif' font-weight='700' fill='%23000000'%3E404%3C/text%3E%3C/svg%3E"
+  >
+  
+  <style>
+    /* --------------------------------------------------
+       1. GLOBAL STYLES & RESET
+    -------------------------------------------------- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #f0f4f8;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      overflow: hidden;
+      user-select: none;
+      /* Prevents text selection while moving mouse */
+    }
+
+    /* --------------------------------------------------
+       2. 404 LAYOUT CONTAINER
+    -------------------------------------------------- */
+    .error-container {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Creates the "4 [Face/SVG] 4" layout alignment */
+    .number-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    /* Big "4" typography styling */
+    .big-four {
+      font-size: 24rem;
+      /* Massive scale like the reference image */
+      font-weight: 900;
+      color: #000000;
+      line-height: 1;
+    }
+
+    /* --------------------------------------------------
+       3. SVG FACE & CHARACTER ANIMATIONS
+    -------------------------------------------------- */
+    svg {
+      width: 320px;
+      /* Aligns perfectly between the two '4's */
+      height: auto;
+      /* Smooth floating effect for the face container */
+      animation: floatBody 4s ease-in-out infinite;
+    }
+
+    /* Eye white scaling for the natural blinking effect */
+    .eye-white-left {
+      transform-origin: 96px 143px;
+      animation: blinkEye 4s linear infinite;
+    }
+
+    .eye-white-right {
+      transform-origin: 314px 143px;
+      animation: blinkEye 4s linear infinite;
+    }
+
+    /* Pupils tracking with transition for mouse lagging smoothness */
+    .pupil {
+      transition: transform 0.08s ease-out;
+    }
+
+    /* Mouth scaling for a slow, organic talking/breathing rhythm */
+    .mouth {
+      transform-origin: 206px 325px;
+      animation: talkingSmooth 1.4s ease-in-out infinite;
+    }
+
+    /* --------------------------------------------------
+       4. TYPOGRAPHY & BUTTON STYLING
+    -------------------------------------------------- */
+    .error-message {
+      font-size: 3rem;
+      font-weight: 500;
+      color: #000000;
+      margin-top: 20px;
+      margin-bottom: 30px;
+    }
+
+    .home-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #ffffff;
+      color: #000000;
+      text-decoration: none;
+      padding: 14px 32px;
+      border: 1.5px solid #000000;
+      border-radius: 50px;
+      /* Rounded pill shape matching the image */
+      font-size: 1.1rem;
+      font-weight: 500;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    /* Button Hover Interaction */
+    .home-btn:hover {
+      background-color: #000000;
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    /* --------------------------------------------------
+       5. ANIMATION KEYFRAMES
+    -------------------------------------------------- */
+
+    /* Subtle vertical floating animation */
+    @keyframes floatBody {
+
+      0%,
+      100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-10px) rotate(0.5deg);
+      }
+    }
+
+    /* Periodic eye blinking mechanism */
+    @keyframes blinkEye {
+
+      0%,
+      45%,
+      55%,
+      100% {
+        transform: scaleY(1);
+      }
+
+      50% {
+        transform: scaleY(0.1);
+      }
+    }
+
+    /* Soft, calm mouth scaling to resemble slow speech/breathing */
+    @keyframes talkingSmooth {
+
+      0%,
+      100% {
+        transform: scaleY(1) scaleX(1);
+      }
+
+      40%,
+      55% {
+        transform: scaleY(1.35) scaleX(0.97) translateY(1px);
+        /* Holds open for a bit */
+      }
+
+      85% {
+        transform: scaleY(0.9) scaleX(1.03);
+        /* Compresses slightly */
+      }
+    }
+
+    /* --------------------------------------------------
+       6. RESPONSIVE MEDIA QUERIES
+    -------------------------------------------------- */
+    @media (max-width: 768px) {
+      .big-four {
+        font-size: 12rem;
+      }
+
+      svg {
+        width: 160px;
+      }
+
+      .error-message {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="error-container">
+
+    <div class="number-wrapper">
+      <div class="big-four">4</div>
+
+      <svg width="411" height="349" viewBox="0 0 411 349" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M94.2146 45.6055C146.247 45.6055 188.429 87.7872 188.429 139.82C188.429 191.853 146.247 234.035 94.2146 234.035C42.1817 234.035 0 191.853 0 139.82C0 87.7872 42.1817 45.6055 94.2146 45.6055Z"
+          fill="black" />
+
+        <path class="eye-white-left" fill-rule="evenodd" clip-rule="evenodd"
+          d="M96.027 53.0625C145.94 53.0625 186.402 93.5242 186.402 143.437C186.402 193.35 145.94 233.812 96.027 233.812C46.1141 233.812 5.65234 193.35 5.65234 143.437C5.65234 93.5242 46.1141 53.0625 96.027 53.0625Z"
+          fill="white" stroke="black" stroke-width="0.5" stroke-miterlimit="2.6131" />
+
+        <g class="pupil" id="pupil-left">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M94.2144 123.443C103.26 123.443 110.597 130.775 110.597 139.826C110.597 148.871 103.266 156.208 94.2144 156.208C85.169 156.208 77.832 148.877 77.832 139.826C77.8377 130.775 85.169 123.443 94.2144 123.443Z"
+            fill="black" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M87.3509 130.672C89.6137 130.672 91.4479 132.506 91.4479 134.769C91.4479 137.032 89.6137 138.866 87.3509 138.866C85.0881 138.866 83.2539 137.032 83.2539 134.769C83.2596 132.506 85.0881 130.672 87.3509 130.672Z"
+            fill="white" stroke="black" stroke-width="0.5" stroke-miterlimit="2.6131" />
+        </g>
+
+        <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M316.539 45.6055C264.506 45.6055 222.324 87.7872 222.324 139.82C222.324 191.853 264.506 234.035 316.539 234.035C368.572 234.035 410.753 191.853 410.753 139.82C410.753 87.7872 368.572 45.6055 316.539 45.6055Z"
+          fill="black" />
+
+        <path class="eye-white-right" fill-rule="evenodd" clip-rule="evenodd"
+          d="M314.73 53.0625C264.817 53.0625 224.355 93.5242 224.355 143.437C224.355 193.35 264.817 233.812 314.73 233.812C364.643 233.812 405.105 193.35 405.105 143.437C405.105 93.5242 364.643 53.0625 314.73 53.0625Z"
+          fill="white" stroke="black" stroke-width="0.5" stroke-miterlimit="2.6131" />
+
+        <g class="pupil" id="pupil-right">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M316.539 123.443C307.493 123.443 300.156 130.775 300.156 139.826C300.156 148.871 307.488 156.208 316.539 156.208C325.59 156.208 332.921 148.877 332.921 139.826C332.915 130.775 325.584 123.443 316.539 123.443Z"
+            fill="black" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M323.402 130.672C321.139 130.672 319.305 132.506 319.305 134.769C319.305 137.032 321.139 138.866 323.402 138.866C325.665 138.866 327.499 137.032 327.499 134.769C327.493 132.506 325.659 130.672 323.402 130.672Z"
+            fill="white" stroke="black" stroke-width="0.5" stroke-miterlimit="2.6131" />
+        </g>
+
+        <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M110.972 8.38344C112.343 13.3604 91.7039 8.13773 65.1161 15.469C38.5282 22.7945 15.9574 39.4912 14.7003 34.9199C13.2032 29.4857 33.1341 9.24056 57.322 2.60074C81.2813 -3.97622 109.601 3.40643 110.972 8.38344Z"
+          fill="black" />
+        <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M300.283 8.38344C298.912 13.3604 319.551 8.13773 346.139 15.469C372.727 22.7945 395.298 39.4912 396.555 34.9199C398.052 29.4857 378.121 9.24056 353.933 2.60074C329.974 -3.97622 301.655 3.40643 300.283 8.38344Z"
+          fill="black" />
+
+        <path class="mouth" fill-rule="evenodd" clip-rule="evenodd"
+          d="M289.805 321.683C292.296 326.66 254.788 321.438 206.481 328.769C158.174 336.094 117.152 352.791 114.867 348.22C112.147 342.786 148.363 322.54 192.316 315.901C235.857 309.324 287.313 316.706 289.805 321.683Z"
+          fill="black" />
+      </svg>
+
+      <div class="big-four">4</div>
+    </div>
+
+    <h1 class="error-message">Page (not) found</h1>
+
+    <a href="/" class="home-btn">
+      Back to home <span>✦</span>
+    </a>
+
+  </div>
+
+  <script>
+    // Grab individual pupil cluster containers
+    const pupilLeft = document.getElementById('pupil-left');
+    const pupilRight = document.getElementById('pupil-right');
+
+    window.addEventListener('mousemove', (e) => {
+      // Current spatial coordinate of mouse cursor pointer
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+
+      // Extract modern viewport centers
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+
+      // Safe limit boundary factor for translation tracking matrix (Max padding inside eyeball)
+      const maxMove = 35;
+
+      // Maps calculation logic relative to screen distance percentage vector 
+      const moveX = ((mouseX - centerX) / centerX) * maxMove;
+      const moveY = ((mouseY - centerY) / centerY) * maxMove;
+
+      // Fire transformation updates smoothly into CSS runtime layer
+      pupilLeft.style.transform = `translate(${moveX}px, ${moveY}px)`;
+      pupilRight.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    });
+  </script>
+
+</body>
+
+</html>
